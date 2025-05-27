@@ -1,0 +1,33 @@
+-- Create TB_PESSOA 
+CREATE TABLE TB_PESSOA (
+    idPessoa NUMBER PRIMARY KEY,
+    nome VARCHAR2(100) NOT NULL,
+    cpf VARCHAR2(11) NOT NULL,
+    dataNascimento DATE NOT NULL
+);
+
+-- Create TB_CONTA 
+CREATE TABLE TB_CONTA (
+    idConta NUMBER PRIMARY KEY,
+    idPessoa NUMBER,
+    saldo NUMBER(15,2) DEFAULT 0 NOT NULL,
+    limiteSaqueDiario NUMBER(15,2) DEFAULT 5000 NOT NULL,
+    flagAtivo NUMBER DEFAULT 1 NOT NULL,
+    tipoConta NUMBER DEFAULT 1 NOT NULL,
+    dataCriacao DATE NOT NULL,
+    FOREIGN KEY (idPessoa) REFERENCES TB_PESSOA(idPessoa)
+);
+
+-- Create TB_TRANSACAO 
+CREATE TABLE TB_TRANSACAO (
+    idTransacao NUMBER PRIMARY KEY,
+    idConta NUMBER NOT NULL,
+    valor NUMBER(15,2) NOT NULL,
+    dataTransacao DATE NOT NULL,
+    FOREIGN KEY (idConta) REFERENCES TB_CONTA(idConta)
+);
+
+-- Auto-incrementing IDs
+CREATE SEQUENCE seq_pessoa START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE seq_conta START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE seq_transacao START WITH 1 INCREMENT BY 1;
