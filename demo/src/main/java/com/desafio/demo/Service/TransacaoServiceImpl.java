@@ -78,4 +78,9 @@ public class TransacaoServiceImpl implements TransacaoService {
     public List<Transacao> extrato(Long idConta) {
         return repoTransacao.findByContaIdConta(idConta);
     }
+
+    @Override
+    public List<Transacao> extratoPeriodo(Long idConta, LocalDate inicio, LocalDate fim) {
+        return repoTransacao.findByIdContaAndDataTransacaoBetween(idConta, inicio, fim);
+    }
 }

@@ -43,7 +43,6 @@ public class ContaController {
         return contaService.findAll();
     }
 
-    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<Conta> getConta(@PathVariable Long id) {
         return contaService.findById(id)
